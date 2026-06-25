@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>claira joy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --linen:   #FBF7F0;
+      --crimson: #A82E26;
+      --ink:     #181210;
+      --cream:   #F0E9DC;
+      --muted:   #7A6E66;
+      --border:  #DDD5C8;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--linen);
+      color: var(--ink);
+      font-family: 'Courier Prime', monospace;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem 1.25rem;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .eyebrow {
+      font-family: 'Courier Prime', monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .name {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(2rem, 8vw, 2.75rem);
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      line-height: 1;
+      margin-bottom: 0.6rem;
+      text-align: center;
+    }
+
+    .tagline {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: clamp(0.82rem, 3vw, 0.95rem);
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.55;
+      margin-bottom: 2.25rem;
+      max-width: 320px;
+    }
+
+    .rule {
+      width: 32px;
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 2.25rem;
+    }
+
+    .links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 2.5rem;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 1rem 1.25rem;
+      background: transparent;
+      border: 0.5px solid var(--border);
+      border-radius: 2px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .link-item:hover {
+      background: var(--cream);
+      border-color: var(--ink);
+    }
+
+    .link-item.primary {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--linen);
+    }
+
+    .link-item.primary:hover {
+      background: #2a1e19;
+    }
+
+    .link-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .link-label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+
+    .link-item.primary .link-label {
+      opacity: 0.6;
+    }
+
+    .link-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .link-arrow {
+      font-size: 0.9rem;
+      opacity: 0.4;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    .closing {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.8rem;
+      color: var(--border);
+      text-align: center;
+      letter-spacing: 0.03em;
+      line-height: 1.6;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .wrap { animation: fadeup 0.5s ease both; }
+      @keyframes fadeup {
+        from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">stanford humbio &nbsp;·&nbsp; los angeles</p>
+
+    <h1 class="name">claira joy</h1>
+    <p class="tagline">building with women who take<br>their bodies & health seriously</p>
+
+    <div class="rule"></div>
+
+    <nav class="links">
+      <a class="link-item primary" href="https://maclairajoy.github.io/apply-for-coaching/" target="_blank" rel="noopener">
+        <div class="link-left">
+          <span class="link-label">Work with me</span>
+          <span class="link-title">Apply to train with Claira</span>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <a class="link-item" href="https://clairajoy.substack.com" target="_blank" rel="noopener">
+        <div class="link-left">
+          <span class="link-label">Writing</span>
+          <span class="link-title">Read the Substack</span>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <a class="link-item" href="https://www.instagram.com/claira_joy" target="_blank" rel="noopener">
+        <div class="link-left">
+          <span class="link-label">Instagram</span>
+          <span class="link-title">Follow along on Instagram</span>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <a class="link-item" href="https://www.tiktok.com/@claira_joy" target="_blank" rel="noopener">
+        <div class="link-left">
+          <span class="link-label">TikTok</span>
+          <span class="link-title">Catch me on TikTok</span>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+    </nav>
+
+    <p class="closing">train with intention · nourish with purpose · transform with joy</p>
+  </div>
+</body>
+</html>
