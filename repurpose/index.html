@@ -1,30 +1,521 @@
-plena
-CONTENT REPURPOSING TOOL
-PASTE YOUR SUBSTACK ESSAY
-CONTENT PILLAR
-FOUNDER
-STRENGTH
-NOURISHMENT
-HUMAN BIOLOGY
-RECOVERY
-LIFESTYLE
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Plena — Content Repurposing Tool</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Courier+Prime:wght@400;700&display=swap');
 
-GENERATE CONTENT →
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-paste an essay, generate four pieces
-talking head script
-carousel outline
-quote graphic text
-instagram caption
-01 — TALKING HEAD SCRIPT
-COPY
-generating...
-02 — CAROUSEL OUTLINE
-COPY
-generating...
-03 — QUOTE GRAPHIC TEXT
-COPY
-generating...
-04 — INSTAGRAM CAPTION
-COPY
-generating...
+  :root {
+    --linen:   #FBF7F0;
+    --cream:   #F0E9DC;
+    --ink:     #181210;
+    --crimson: #A82E26;
+    --muted:   #7A6E66;
+    --border:  #DDD5C8;
+    --white:   #ffffff;
+  }
+
+  html { font-size: 16px; }
+  body {
+    background: var(--linen);
+    color: var(--ink);
+    font-family: 'Courier Prime', monospace;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* HEADER */
+  header {
+    border-bottom: 0.5px solid var(--border);
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .logo {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .logo-sub {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* MAIN LAYOUT */
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 57px);
+  }
+
+  /* LEFT PANEL */
+  .left {
+    border-right: 0.5px solid var(--border);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .panel-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .essay-input {
+    width: 100%;
+    flex: 1;
+    min-height: 400px;
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: 4px;
+    padding: 1rem;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--ink);
+    resize: vertical;
+    outline: none;
+  }
+  .essay-input:focus { border-color: var(--muted); }
+  .essay-input::placeholder { color: var(--border); font-style: italic; }
+
+  .pillar-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .pillar-btn {
+    font-family: 'Courier Prime', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border: 0.5px solid var(--border);
+    border-radius: 20px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .pillar-btn:hover { border-color: var(--muted); color: var(--ink); }
+  .pillar-btn.selected { background: var(--ink); color: var(--linen); border-color: var(--ink); }
+
+  .generate-btn {
+    font-family: 'Courier Prime', monospace;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 24px;
+    background: var(--ink);
+    color: var(--linen);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.15s;
+    width: 100%;
+  }
+  .generate-btn:hover { background: #2a1e18; }
+  .generate-btn:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
+
+  /* RIGHT PANEL */
+  .right {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow-y: auto;
+  }
+
+  /* OUTPUT CARDS */
+  .output-card {
+    border: 0.5px solid var(--border);
+    border-radius: 4px;
+    background: var(--white);
+    overflow: hidden;
+  }
+  .output-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-bottom: 0.5px solid var(--border);
+    background: var(--linen);
+  }
+  .output-title {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: 'Courier Prime', monospace;
+  }
+  .copy-btn {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 0.5px solid var(--border);
+    border-radius: 20px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .copy-btn:hover { border-color: var(--ink); color: var(--ink); }
+  .copy-btn.copied { border-color: var(--crimson); color: var(--crimson); }
+
+  .output-body {
+    padding: 1.25rem;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--ink);
+    white-space: pre-wrap;
+    min-height: 80px;
+    font-family: 'Libre Baskerville', serif;
+  }
+
+  .output-body.empty {
+    color: var(--border);
+    font-style: italic;
+    font-size: 12px;
+  }
+
+  /* LOADING STATE */
+  .loading-bar {
+    height: 2px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    display: none;
+  }
+  .loading-bar.active { display: block; }
+  .loading-bar-inner {
+    height: 100%;
+    background: var(--crimson);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .status-line {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-align: center;
+    min-height: 18px;
+  }
+
+  /* EMPTY STATE */
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 12px;
+    text-align: center;
+    padding: 3rem;
+    color: var(--border);
+  }
+  .empty-state-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--muted);
+  }
+  .empty-state-sub {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--border);
+    line-height: 1.7;
+  }
+
+  .crimson-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--crimson);
+    opacity: 0.4;
+  }
+
+  @media (max-width: 768px) {
+    .main { grid-template-columns: 1fr; }
+    .left { border-right: none; border-bottom: 0.5px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="logo">plena</span>
+  <span class="logo-sub">content repurposing tool</span>
+</header>
+
+<div class="main">
+  <!-- LEFT: INPUT -->
+  <div class="left">
+    <div>
+      <div class="panel-label">paste your substack essay</div>
+    </div>
+
+    <textarea
+      class="essay-input"
+      id="essayInput"
+      placeholder="Paste your full Substack essay here. The tool will generate a talking head script, carousel outline, quote graphic, and Instagram caption — all in your voice."
+    ></textarea>
+
+    <div>
+      <div class="panel-label" style="margin-bottom:8px;">content pillar</div>
+      <div class="pillar-row" id="pillarRow">
+        <button class="pillar-btn selected" data-pillar="founder" onclick="selectPillar(this)">Founder</button>
+        <button class="pillar-btn" data-pillar="strength" onclick="selectPillar(this)">Strength</button>
+        <button class="pillar-btn" data-pillar="nourishment" onclick="selectPillar(this)">Nourishment</button>
+        <button class="pillar-btn" data-pillar="human biology" onclick="selectPillar(this)">Human Biology</button>
+        <button class="pillar-btn" data-pillar="recovery" onclick="selectPillar(this)">Recovery</button>
+        <button class="pillar-btn" data-pillar="lifestyle" onclick="selectPillar(this)">Lifestyle</button>
+      </div>
+    </div>
+
+    <div class="loading-bar" id="loadingBar">
+      <div class="loading-bar-inner" id="loadingBarInner"></div>
+    </div>
+    <div class="status-line" id="statusLine"></div>
+
+    <button class="generate-btn" id="generateBtn" onclick="generate()">
+      generate content →
+    </button>
+  </div>
+
+  <!-- RIGHT: OUTPUT -->
+  <div class="right" id="rightPanel">
+    <div class="empty-state" id="emptyState">
+      <div class="crimson-dot"></div>
+      <div class="empty-state-title">paste an essay, generate four pieces</div>
+      <div class="empty-state-sub">
+        talking head script<br>
+        carousel outline<br>
+        quote graphic text<br>
+        instagram caption
+      </div>
+    </div>
+
+    <div id="outputCards" style="display:none; display:flex; flex-direction:column; gap:1.5rem;">
+
+      <div class="output-card" id="card-script">
+        <div class="output-header">
+          <span class="output-title">01 — talking head script</span>
+          <button class="copy-btn" onclick="copyOutput('script')">copy</button>
+        </div>
+        <div class="output-body empty" id="out-script">generating...</div>
+      </div>
+
+      <div class="output-card" id="card-carousel">
+        <div class="output-header">
+          <span class="output-title">02 — carousel outline</span>
+          <button class="copy-btn" onclick="copyOutput('carousel')">copy</button>
+        </div>
+        <div class="output-body empty" id="out-carousel">generating...</div>
+      </div>
+
+      <div class="output-card" id="card-quote">
+        <div class="output-header">
+          <span class="output-title">03 — quote graphic text</span>
+          <button class="copy-btn" onclick="copyOutput('quote')">copy</button>
+        </div>
+        <div class="output-body empty" id="out-quote">generating...</div>
+      </div>
+
+      <div class="output-card" id="card-caption">
+        <div class="output-header">
+          <span class="output-title">04 — instagram caption</span>
+          <button class="copy-btn" onclick="copyOutput('caption')">copy</button>
+        </div>
+        <div class="output-body empty" id="out-caption">generating...</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+let selectedPillar = 'founder';
+
+function selectPillar(btn) {
+  document.querySelectorAll('.pillar-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedPillar = btn.dataset.pillar;
+}
+
+function setStatus(msg) {
+  document.getElementById('statusLine').textContent = msg;
+}
+
+function setLoading(pct) {
+  document.getElementById('loadingBarInner').style.width = pct + '%';
+}
+
+function copyOutput(key) {
+  const el = document.getElementById('out-' + key);
+  const btn = el.closest('.output-card').querySelector('.copy-btn');
+  navigator.clipboard.writeText(el.textContent).then(() => {
+    btn.textContent = 'copied ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+async function callClaude(systemPrompt, userPrompt) {
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1000,
+      system: systemPrompt,
+      messages: [{ role: 'user', content: userPrompt }]
+    })
+  });
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.message);
+  return data.content[0].text;
+}
+
+const VOICE_CONTEXT = `You are writing content for Claira Joy — a Stanford HumBio graduate, strength and nutrition coach, and founder of Plena. Her voice is: warm, direct, quietly confident, never performative. No em dashes. No hedging. No wellness clichés. Short punchy sentences. She speaks to high-achieving women who are intellectually overclocked and physically underserved. Her brand positioning: "Her body is not the problem. Her disconnection from it is." She believes movement is a spiritual act, that women already know the answer within, and that physiological attunement — not protocols — is the goal. All content should sound like her, not like generic wellness content.`;
+
+async function generate() {
+  const essay = document.getElementById('essayInput').value.trim();
+  if (!essay || essay.length < 100) {
+    setStatus('paste a full essay first.');
+    return;
+  }
+
+  const btn = document.getElementById('generateBtn');
+  btn.disabled = true;
+  btn.textContent = 'generating...';
+
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('outputCards').style.display = 'flex';
+  document.getElementById('loadingBar').classList.add('active');
+
+  ['script','carousel','quote','caption'].forEach(k => {
+    const el = document.getElementById('out-' + k);
+    el.textContent = 'generating...';
+    el.classList.add('empty');
+  });
+
+  const pillar = selectedPillar;
+
+  try {
+    // 01 — SCRIPT
+    setStatus('writing talking head script...');
+    setLoading(10);
+    const script = await callClaude(
+      VOICE_CONTEXT,
+      `Based on this Substack essay, write a tight 60–75 second talking head script for Instagram Reels. Pillar: ${pillar}.
+
+Rules:
+- Open with a scroll-stopping hook line (under 10 words) that does NOT repeat the essay title
+- 3 clear beats: hook → insight → call to action or closing thought
+- Write in Claira's voice: direct, warm, no clichés, no em dashes
+- End with a line that makes someone want to follow or read more
+- Format: just the script, no stage directions, no labels
+
+Essay:
+${essay}`
+    );
+    document.getElementById('out-script').textContent = script;
+    document.getElementById('out-script').classList.remove('empty');
+    setLoading(30);
+
+    // 02 — CAROUSEL
+    setStatus('building carousel outline...');
+    setLoading(35);
+    const carousel = await callClaude(
+      VOICE_CONTEXT,
+      `Based on this Substack essay, create a 6-slide Instagram carousel outline. Pillar: ${pillar}.
+
+Rules:
+- Slide 1: hook — a bold statement or question that stops the scroll (under 10 words)
+- Slides 2–5: one insight per slide, expressed in 1–2 short sentences each
+- Slide 6: closing thought + CTA (follow along, read the full essay on Substack)
+- Each slide should work as a standalone thought
+- Write in Claira's voice: direct, warm, no clichés
+- Format each slide as: SLIDE N: [headline] / [1-2 sentence body]
+
+Essay:
+${essay}`
+    );
+    document.getElementById('out-carousel').textContent = carousel;
+    document.getElementById('out-carousel').classList.remove('empty');
+    setLoading(60);
+
+    // 03 — QUOTE
+    setStatus('pulling the strongest quote...');
+    setLoading(65);
+    const quote = await callClaude(
+      VOICE_CONTEXT,
+      `From this Substack essay, extract or craft the single strongest quote for a Figma quote graphic. Pillar: ${pillar}.
+
+Rules:
+- Under 20 words — this will appear as large text on a visual
+- Must be the most memorable, most Claira-coded line in the essay
+- Can be a direct pull or a refined version of something she said
+- Below the quote, write a 3–5 word subtext line in Courier Prime style (all lowercase, evocative)
+- Format: QUOTE: [the quote] / SUBTEXT: [the subtext]
+
+Essay:
+${essay}`
+    );
+    document.getElementById('out-quote').textContent = quote;
+    document.getElementById('out-quote').classList.remove('empty');
+    setLoading(80);
+
+    // 04 — CAPTION
+    setStatus('writing instagram caption...');
+    setLoading(85);
+    const caption = await callClaude(
+      VOICE_CONTEXT,
+      `Write an Instagram caption for a post based on this Substack essay. Pillar: ${pillar}.
+
+Rules:
+- Short — under 150 words
+- Does NOT retell the essay — it's a different emotional entry point into the same idea
+- Warm, intimate, like something you'd write to a friend or in a journal
+- All lowercase
+- End with an invitation: come say hi below, follow along, or read the full essay on Substack (link in bio)
+- No hashtags in the caption body — add them as a separate line at the end
+- Hashtags: choose 8–10 relevant ones from: #buildinginpublic #stanford #womenstraining #strengthcoach #womenswellness #founderstory #plena #humbio #strengthtraining #nutritioncoach #womenswellness #healthcoach #guthealth #glucoserevolution
+
+Essay:
+${essay}`
+    );
+    document.getElementById('out-caption').textContent = caption;
+    document.getElementById('out-caption').classList.remove('empty');
+    setLoading(100);
+
+    setStatus('done. four pieces ready to use.');
+
+  } catch (err) {
+    setStatus('error: ' + err.message);
+    console.error(err);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'generate content →';
+    setTimeout(() => {
+      document.getElementById('loadingBar').classList.remove('active');
+      setLoading(0);
+    }, 1000);
+  }
+}
+</script>
+</body>
+</html>
